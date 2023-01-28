@@ -1,7 +1,17 @@
 # Docker Hello World.
 
 Ejemplo uso docker
-Crea una imagen para poder ejecutar un proyecto php-apache
+Crea una imagen para poder ejecutar un proyecto php-apache.
+
+## Conceptos básicos
+Diferenciar conceptos `imagen` (clase) y `contenedor` (objeto)
+El flujo de creación es el siguiente: 1 Dockerfile -> 1 Imagen -> 1 Contenedor.
+
+El Dockerfile define las instrucciones para crear una imagen. 
+
+La imagen se genera a partir de un Dockerfile con el comando `build`. La imagen contiene 3 cosas: sistema operativo (Ubuntu, Windows), software (LAMP) y tu app (código)
+
+Para crear un contenedor hay que correr la imagen con la instrucción `run`.
 
 ## Para crear las imagenes
 ``` shell
