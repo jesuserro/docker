@@ -1,9 +1,11 @@
 version: '3.8'
 services:
-  php-apache-environment:
-    container_name: php-apache
-    image: php:7.4-apache
-    volumes:
-      - /home/jesus/proyectos/:/var/www/html/
-    ports:
-      - 8074:80
+    php-apache-environment:
+        container_name: php74-apache
+        build:
+            context: .
+            dockerfile: Dockerfile3.74
+        volumes:
+            - /home/jesus/proyectos/:/var/www/html/
+        ports:
+            - 8074:80
