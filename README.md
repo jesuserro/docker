@@ -69,4 +69,4 @@ docker rmi $(docker images -q)
 
 [![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
 
-- [Terraform](https://registry.terraform.io/)
+- [Terraform Cloud Management](https://registry.terraform.io/)
