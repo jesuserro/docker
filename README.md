@@ -37,7 +37,7 @@ localhost:8074
 localhost:8082
 ```
 
-## Usando Docker Compose
+## Levantando con Docker Compose
 
 ``` shell
 cd /home/username/proyectos/docker
