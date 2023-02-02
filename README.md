@@ -31,12 +31,6 @@ localhost:8082
 ``` shell
 cd /home/username/proyectos/docker
 
-# Removing all previous docker containers  
-docker container rm -f $(docker container ls -aq)
-
-# Removing all previous docker images  
-docker rmi $(docker images -q)
-
 # Levantando contenedores definidos en docker-compose.yml
 docker compose up
 
@@ -48,6 +42,15 @@ docker exec -it php82-apache /bin/bash
 
 # Mostrando logs del contenedor
 docker logs php82-apache
+
+# Parando contenedores
+docker stop php82-apache
+
+# Removing all previous docker containers  
+docker container rm -f $(docker container ls -aq)
+
+# Removing all previous docker images  
+docker rmi $(docker images -q)
 ```
 
 ## Tutoriales
