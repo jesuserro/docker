@@ -48,7 +48,7 @@ docker container rm -f $(docker container ls -aq)
 # Removing all previous docker images  
 docker rmi $(docker images -q)
 
-# Levantando contenedores
+# Levantando contenedores definidos en docker-compose.yml
 docker compose up
 
 # Abriendo terminal del contenedor
