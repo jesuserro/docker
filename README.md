@@ -65,5 +65,5 @@ docker rmi $(docker images -q)
 
 ## Otros enlaces de interés
 
-[![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
-[Terraform](https://registry.terraform.io/)
+- [![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
+- [Terraform](https://registry.terraform.io/)
