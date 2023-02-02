@@ -16,23 +16,16 @@ Para crear un contenedor hay que correr la imagen con la instrucción `run`. Est
 
 ## Forma simple
 
-### Para crear las imagenes
-
 ``` shell
+# Para crear las imagenes
 docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
-```
 
-### Para lanzar los contenedores
-
-``` shell
+# Para lanzar los contenedores
 docker run -d -p 8082:80 -v /home/username/proyectos:/var/www/html --name php82 php_apache:8.2
 docker run -d -p 8074:80 -v /home/username/proyectos:/var/www/html --name php74 php_apache:7.4
-```
 
 ### Para probarlo en el navegador
-
-``` shell
 localhost:8074
 localhost:8082
 ```
@@ -42,15 +35,19 @@ localhost:8082
 ``` shell
 cd /home/username/proyectos/docker
 
-# remove all docker containers  
+# Removing all previous docker containers  
 docker container rm -f $(docker container ls -aq)
-# command to remove all docker images  
+
+# Removing all previous docker images  
 docker rmi $(docker images -q)
 
+# Levantando contenedores
 docker compose up
 
+# Abriendo terminal del contenedor
 docker exec -it php82-apache /bin/bash
 
+# Mostrando logs del contenedor
 docker logs php82-apache
 ```
 
