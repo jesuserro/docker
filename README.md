@@ -21,7 +21,7 @@ mkdir ~/proyectos && cd ~/proyectos
 git clone https://github.com/jesuserro/docker.git
 ```
 
-## Levantando container simple
+## Levantando containers simples
 
 ``` shell
 # Para crear las imagenes
@@ -37,7 +37,7 @@ localhost:8074
 localhost:8082
 ```
 
-## Levantando con Docker Compose
+## Levantando containers con Docker Compose
 
 ``` shell
 cd /home/username/proyectos/docker
