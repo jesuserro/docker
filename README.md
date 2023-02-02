@@ -14,23 +14,40 @@ La imagen se genera a partir de un Dockerfile con el comando `build`. La imagen 
 
 Para crear un contenedor hay que correr la imagen con la instrucción `run`. Esto hace la descarga de la imagen a tu dispositivo.
 
-## Para crear las imagenes
+## Forma simple
+
+### Para crear las imagenes
 
 ``` shell
 docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
 ```
 
-## Para lanzar los contenedores
+#### Para lanzar los contenedores
 
 ``` shell
 docker run -d -p 8082:80 -v /mnt/c/proyectos:/var/www/html --name php82 php_apache:8.2
 docker run -d -p 8074:80 -v /mnt/c/proyectos:/var/www/html --name php74 php_apache:7.4
 ```
 
-## Para probarlo en el navegador
+#### Para probarlo en el navegador
 
 ``` shell
 localhost:8074
 localhost:8082
+```
+
+## Usando Docker Compose
+
+``` shell
+# remove all docker containers  
+docker container rm -f $(docker container ls -aq)
+# command to remove all docker images  
+docker rmi $(docker images -q)
+
+docker compose up
+
+docker exec -it php82-apache /bin/bash
+
+docker logs php82-apache
 ```
