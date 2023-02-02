@@ -18,8 +18,8 @@ docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
 
 # Para lanzar los contenedores
-docker run -d -p 8082:80 -v /home/username/proyectos:/var/www/html --name php82 php_apache:8.2
-docker run -d -p 8074:80 -v /home/username/proyectos:/var/www/html --name php74 php_apache:7.4
+docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
+docker run -d -p 8074:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.4
 
 # Para probarlo en tu navegador
 localhost:8074
@@ -29,7 +29,7 @@ localhost:8082
 ## Levantando containers con Docker Compose
 
 ``` shell
-cd /home/username/proyectos/docker
+cd /home/jesus/proyectos/docker
 
 # Levantando contenedores definidos en docker-compose.yml
 docker compose up
