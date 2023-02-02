@@ -14,6 +14,13 @@ La imagen se genera a partir de un Dockerfile con el comando `build`. La imagen 
 
 Para crear un contenedor hay que correr la imagen con la instrucción `run`. Esto hace la descarga de la imagen a tu dispositivo.
 
+## Instalacion
+
+``` shell
+mkdir ~/proyectos && cd ~/proyectos
+git clone https://github.com/jesuserro/docker.git
+```
+
 ## Forma simple
 
 ``` shell
