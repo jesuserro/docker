@@ -3,17 +3,6 @@
 Ejemplo uso docker. Creación de 2 containers apache con php 7.4 y php 8.2.
 Se hace a partir de la imagen oficial de PHP en Docker Hub: <https://hub.docker.com/_/php>
 
-## Conceptos básicos
-
-Diferenciar conceptos `imagen` (clase) y `contenedor` (objeto)
-El flujo de creación es el siguiente: 1 yml file -> 1 Dockerfile -> 1 Imagen -> 1 Contenedor.
-
-El Dockerfile define las instrucciones para crear una imagen.
-
-La imagen se genera a partir de un Dockerfile con el comando `build`. La imagen contiene 3 cosas: sistema operativo (Ubuntu, Windows), software (LAMP) y tu app (código)
-
-Para crear un contenedor hay que correr la imagen con la instrucción `run`. Esto hace la descarga de la imagen a tu dispositivo.
-
 ## Instalacion
 
 ``` shell
