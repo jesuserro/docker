@@ -1,9 +1,9 @@
 # Docker Hello World
 
-Ejemplo uso docker. Creación de 2 containers apache con php 7.4 y php 8.2.
+Ejemplo sencillo de uso Docker. Creación de 2 containers Apache con PHP 7.4 y PHP 8.2.
 Se hace a partir de la imagen oficial de PHP en Docker Hub: <https://hub.docker.com/_/php>
 
-## Instalacion
+## Instalación
 
 ``` shell
 mkdir ~/proyectos && cd ~/proyectos
