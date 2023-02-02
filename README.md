@@ -40,6 +40,8 @@ localhost:8082
 ## Usando Docker Compose
 
 ``` shell
+cd /home/username/proyectos/docker
+
 # remove all docker containers  
 docker container rm -f $(docker container ls -aq)
 # command to remove all docker images  
