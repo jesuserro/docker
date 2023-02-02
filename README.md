@@ -1,7 +1,7 @@
 # Docker Hello World
 
-Ejemplo uso docker
-Crea una imagen para poder ejecutar un proyecto php-apache.
+Ejemplo uso docker. Creación de 2 containers apache con php 7.4 y php 8.2.
+Se hace a partir de la imagen oficial de PHP en Docker Hub: <https://hub.docker.com/_/php>
 
 ## Conceptos básicos
 
