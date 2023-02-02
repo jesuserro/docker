@@ -62,3 +62,8 @@ docker rmi $(docker images -q)
 ### Aprende Docker en 14 minutos 🐳
 
 [![Aprende Docker en 14 minutos 🐳](https://img.youtube.com/vi/6idFknRIOp4/0.jpg)](https://www.youtube.com/watch?v=6idFknRIOp4)
+
+## Otros enlaces de interés
+
+[![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
+[Terraform](https://registry.terraform.io/)
