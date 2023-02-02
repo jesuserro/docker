@@ -21,7 +21,7 @@ mkdir ~/proyectos && cd ~/proyectos
 git clone https://github.com/jesuserro/docker.git
 ```
 
-## Forma simple
+## Levantando container simple
 
 ``` shell
 # Para crear las imagenes
