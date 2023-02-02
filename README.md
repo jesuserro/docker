@@ -46,10 +46,10 @@ docker logs php82-apache
 # Parando contenedores
 docker stop php82-apache
 
-# Removing all previous docker containers  
+# Removing all docker containers  
 docker container rm -f $(docker container ls -aq)
 
-# Removing all previous docker images  
+# Removing all docker images  
 docker rmi $(docker images -q)
 ```
 
