@@ -51,6 +51,9 @@ docker rmi $(docker images -q)
 # Levantando contenedores definidos en docker-compose.yml
 docker compose up
 
+# En tu navegador
+localhost:8082
+
 # Abriendo terminal del contenedor
 docker exec -it php82-apache /bin/bash
 
