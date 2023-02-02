@@ -69,6 +69,6 @@ docker rmi $(docker images -q)
 
 [![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
 
-- [Migración de Zend Framework 1 a PHP 8](https://github.com/Shardj/zf1-future)
+- [Migración de Zend Framework 1 a PHP 8.1](https://github.com/Shardj/zf1-future)
 
 - [Terraform](https://registry.terraform.io/) a cloud management service for AWS, Google Cloud, Azure, and so on.
