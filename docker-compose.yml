@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    img-php70-apache:
+    php70-apache:
         container_name: php70-apache
         build:
             context: .
