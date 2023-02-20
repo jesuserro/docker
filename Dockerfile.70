@@ -12,7 +12,7 @@ RUN apt-get update \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 \
-    && docker-php-ext-enable pdo_mysql zip bcmath bz2
+    && docker-php-ext-enable pdo_mysql zip bcmath bz2 opcache
 
 RUN pecl channel-update pecl.php.net \
     && pecl install xdebug-2.5.5 \
