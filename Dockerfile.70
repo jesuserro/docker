@@ -5,14 +5,11 @@ RUN apt-get update \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
-        libjpeg-dev \
         --allow-unauthenticated \
-        exif \
     && docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
+        --with-freetype-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install -j$(nproc) exif \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -24,7 +21,7 @@ RUN pecl channel-update pecl.php.net \
     && docker-php-ext-enable xdebug
 
 WORKDIR /var/www/html
-
 EXPOSE 80
+
 
 
