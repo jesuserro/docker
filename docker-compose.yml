@@ -7,5 +7,7 @@ services:
             dockerfile: Dockerfile.70
         volumes:
             - /home/jesus/proyectos/:/var/www/html/
+        extra_hosts:
+            - host.docker.internal:host-gateway
         ports:
             - 8070:80

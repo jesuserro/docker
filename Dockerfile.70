@@ -1,6 +1,12 @@
 # Build image
 FROM php:7.0.27-apache AS builder
 
+# Enable rewrite mode
+RUN a2enmod rewrite
+
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+# Install required packages and PHP extensions
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libfreetype6-dev \
@@ -10,16 +16,32 @@ RUN apt-get update \
         libbz2-dev \
         libxslt1-dev \
         net-tools \
+        wget \
         --allow-unauthenticated \
     && docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl \
-        && docker-php-ext-enable pdo_mysql zip bcmath bz2 opcache tokenizer xsl
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN pecl install apcu-5.1.18 xdebug-2.5.5 \
+    && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl \
+    && pecl install apcu-5.1.18 xdebug-2.5.5 \
     && docker-php-ext-enable xdebug apcu \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)\nxdebug.mode=debug\nxdebug.idekey=VSCODE\nxdebug.remote_enable=1\nxdebug.remote_autostart=1\nextension=apcu.so\n" >> /usr/local/etc/php/php.ini
+    && apt-get purge -y g++ \
+    && apt-get autoremove -y \
+    && rm -r /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
+# Copy php.ini
+COPY php.ini /usr/local/etc/php/
+
+# Install Composer
+RUN wget -O /tmp/composer-setup.php https://getcomposer.org/installer \
+    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm /tmp/composer-setup.php
+
+# Change the current working directory
+WORKDIR /var/www/html
+
+# Change the owner of the container document root
+RUN chown -R www-data:www-data /var/www/html
+
+# Start Apache in foreground
+CMD ["apache2-foreground"]

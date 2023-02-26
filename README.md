@@ -72,3 +72,9 @@ docker rmi $(docker images -q)
 - [Migración de Zend Framework 1 a PHP 8.1](https://github.com/Shardj/zf1-future)
 
 - [Terraform](https://registry.terraform.io/) a cloud management service for AWS, Google Cloud, Azure, and so on.
+
+## Interesting Dockerfiles
+
+- <https://jasonterando.medium.com/debugging-with-visual-studio-code-xdebug-and-docker-on-windows-b63a10b0dec>
+- <https://github.com/thecodeholic/php-mvc-framework>
+- <https://stackoverflow.com/questions/52579102/debug-php-with-vscode-and-docker>
