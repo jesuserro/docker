@@ -1,5 +1,6 @@
 FROM php:7.0.27-apache
 
+# Install libs
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libfreetype6-dev \
@@ -8,6 +9,7 @@ RUN apt-get update \
         libzip-dev \
         libbz2-dev \
         libxslt1-dev \
+        net-tools \
         --allow-unauthenticated \
     && docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
@@ -15,12 +17,15 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl \
     && docker-php-ext-enable pdo_mysql zip bcmath bz2 opcache tokenizer xsl
 
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN pecl channel-update pecl.php.net \
-    && pecl install xdebug-2.5.5 \
+# Install XDEBUG
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN pecl install xdebug-2.5.5 \
     && pecl install apcu-5.1.18 \
     && docker-php-ext-enable xdebug apcu
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so" >> /usr/local/etc/php/php.ini
+ENV XDEBUG_CONFIG remote_host=host.docker.internal
 
 WORKDIR /var/www/html
 EXPOSE 80
