@@ -53,6 +53,35 @@ docker container rm -f $(docker container ls -aq)
 docker rmi $(docker images -q)
 ```
 
+## VSCODE XDEBUG
+
+In the `launch.json` in your VSCODE project, add this:
+
+``` shell
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker Xdebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9000,
+      "pathMappings": {
+          "/var/www/html/YOUR_PROJECT": "${workspaceFolder}"
+      },
+      "hostname": "localhost",
+      "log": true,
+      "xdebugSettings": {
+          "max_data": -1
+      }
+    }    
+  ]
+}
+```
+
 ## Tutoriales
 
 ### DOCKER De NOVATO a PRO! (CURSO COMPLETO EN ESPAÑOL)
