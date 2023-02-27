@@ -53,15 +53,14 @@ docker container rm -f $(docker container ls -aq)
 docker rmi $(docker images -q)
 ```
 
-## VSCODE XDEBUG
+## VSCODE
+
+### XDEBUG
 
 In the `launch.json` in your VSCODE project, add this:
 
 ``` shell
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -80,6 +79,20 @@ In the `launch.json` in your VSCODE project, add this:
     }    
   ]
 }
+```
+
+### Php Executable
+
+``` shell
+# Getting executable from the container
+docker cp php70-apache:/usr/local/bin/php ./var/bin/php
+# In VSCODE settings.json
+"php.executablePath": "./var/bin/php"
+
+# Executable from your local LAMP
+which php
+# In VSCODE settings.json
+"php.executablePath": "/usr/bin/php"
 ```
 
 ## Tutoriales
