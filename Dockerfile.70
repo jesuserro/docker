@@ -12,6 +12,8 @@ RUN apt-get update \
         libxslt1-dev \
         net-tools \
         wget \
+        git \
+        unzip \
         --allow-unauthenticated \
     && docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
@@ -23,6 +25,9 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && rm -r /var/lib/apt/lists/* \
     && rm -rf /tmp/*
+
+# Set the PATH environment variable
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Copy php.ini
 COPY php.ini /usr/local/etc/php/
