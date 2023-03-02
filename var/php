@@ -1,0 +1,5 @@
+# copy this file as php in: /usr/local/bin/
+path=$(printf '%s\n' "${PWD##*/}")
+command="docker exec -i php70-apache php '$@'"
+echo "Running php on docker ${path}"
+$command
