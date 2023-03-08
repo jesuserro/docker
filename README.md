@@ -13,7 +13,10 @@ git clone https://github.com/jesuserro/docker.git
 ## Levantando containers simples
 
 ``` shell
-# Para crear las imagenes
+# Levantar container con yaml
+docker compose up
+
+# Para reconstruir imagenes ya creadas
 docker build -t php_apache:7.0 -f Dockerfile.70 .
 docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
