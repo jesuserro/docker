@@ -14,6 +14,7 @@ git clone https://github.com/jesuserro/docker.git
 
 ``` shell
 # Para crear las imagenes
+docker build -t php_apache:7.0 -f Dockerfile.70 .
 docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
 
