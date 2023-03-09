@@ -1,7 +1,9 @@
 # Docker Hello World
 
-Ejemplo sencillo de uso Docker. Creación de 2 containers Apache con PHP 7.4 y PHP 8.2.
-Se hace a partir de la imagen oficial de PHP en Docker Hub: <https://hub.docker.com/_/php>
+Simple example of using Docker. Creation of 2 Apache containers with PHP 7.0 to PHP 8.2.
+It is made from the official PHP image on Docker Hub: <https://hub.docker.com/_/php>
+
+These Dockerfiles, specially Dockerfile 7.0, install the required packages and PHP extensions, set the PATH environment variable, install Composer, change the current working directory, and set the owner of the container document root. They then install XDEBUG, enable rewrite mode, and set the Apache document root and virtual host parameters using the techniques described earlier. Finally, they starts Apache in foreground mode.
 
 ## Instalación
 

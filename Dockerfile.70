@@ -53,5 +53,8 @@ ENV XDEBUG_CONFIG remote_host=host.docker.internal
 # Enable rewrite mode
 RUN a2enmod rewrite
 
+# Add custom virtual host configuration
+COPY custom-virtual-host.conf /etc/apache2/sites-enabled/
+
 # Start Apache in foreground
 CMD ["apache2-foreground"]
