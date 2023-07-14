@@ -2,7 +2,7 @@
 FROM php:8.2-apache AS builder
 
 # Install required packages and PHP extensions
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+# COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Set the PATH environment variable
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
