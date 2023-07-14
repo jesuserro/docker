@@ -1,0 +1,48 @@
+# Build image
+FROM php:8.0-apache AS builder
+
+# Set the PATH environment variable
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Copy php.ini
+COPY php.ini /usr/local/etc/php/
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Enable display of PHP errors in the browser
+RUN { \
+    echo 'display_errors = On'; \
+    echo 'display_startup_errors = On'; \
+    echo 'error_reporting = E_ALL'; \
+    echo 'html_errors = On'; \
+    echo 'xdebug.mode = debug'; \
+    echo 'xdebug.start_with_request = yes'; \
+    echo 'xdebug.client_host = host.docker.internal'; \
+    echo 'xdebug.idekey = VSCODE'; \
+    echo 'xdebug.discover_client_host = 1'; \
+    echo 'xdebug.client_port = 9000'; \
+} >> /usr/local/etc/php/php.ini
+
+# Install MySQL extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql session
+
+# Adjust the working directory
+WORKDIR /var/www/html
+
+# Copy project files
+COPY ./.. /var/www/html
+
+# Change the owner of the container document root
+RUN chown -R www-data:www-data /var/www/html
+
+# Add custom virtual host configuration
+COPY custom-virtual-host.conf /etc/apache2/sites-available/
+RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
+
+# Enable rewrite mode
+RUN a2enmod rewrite
+
+# Start Apache in foreground
+CMD ["apache2-foreground"]
