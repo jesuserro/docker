@@ -3,29 +3,6 @@ FROM php:8.2-apache AS builder
 
 # Install required packages and PHP extensions
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-        libzip-dev \
-        libbz2-dev \
-        libxslt-dev \
-        net-tools \
-        wget \
-        git \
-        unzip \
-        --allow-unauthenticated \
-    && docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl exif calendar gettext \
-    && pecl install apcu xdebug \
-    && docker-php-ext-enable apcu opcache xdebug \
-    && apt-get purge -y g++ \
-    && apt-get autoremove -y \
-    && rm -r /var/lib/apt/lists/* \
-    && rm -rf /tmp/*
 
 # Set the PATH environment variable
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -33,20 +10,32 @@ ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # Copy php.ini
 COPY php.ini /usr/local/etc/php/
 
-# Install Composer
-RUN wget -O /tmp/composer-setup.php https://getcomposer.org/installer \
-    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && rm /tmp/composer-setup.php
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Enable display of PHP errors in the browser
+RUN { \
+    echo 'display_errors = On'; \
+    echo 'display_startup_errors = On'; \
+    echo 'error_reporting = E_ALL'; \
+    echo 'html_errors = On'; \
+    echo 'xdebug.mode = debug'; \
+    echo 'xdebug.start_with_request = yes'; \
+    echo 'xdebug.client_host = host.docker.internal'; \
+    echo 'xdebug.idekey = VSCODE'; \
+    echo 'xdebug.discover_client_host = 1'; \
+    echo 'xdebug.client_port = 9000'; \
+} >> /usr/local/etc/php/php.ini
+
+# Install MySQL extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Change the current working directory
 WORKDIR /var/www/html
 
 # Change the owner of the container document root
 RUN chown -R www-data:www-data /var/www/html
-
-# Config XDEBUG
-RUN echo "zend_extension=xdebug.so" >> /usr/local/etc/php/php.ini
-ENV XDEBUG_CONFIG="remote_host=host.docker.internal"
 
 # Add custom virtual host configuration
 COPY custom-virtual-host.conf /etc/apache2/sites-available/
@@ -57,5 +46,3 @@ RUN a2enmod rewrite
 
 # Start Apache in foreground
 CMD ["apache2-foreground"]
-
-

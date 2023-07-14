@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    php70-apache:
+    php82-apache:
         container_name: php82-apache
         build:
             context: .
