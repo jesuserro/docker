@@ -1,7 +1,61 @@
-FROM php:8.2-apache
-RUN apt-get update -y && apt-get upgrade -y
-RUN docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql && \
-  docker-php-ext-enable pdo_mysql
+# Build image
+FROM php:8.2-apache AS builder
+
+# Install required packages and PHP extensions
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libzip-dev \
+        libbz2-dev \
+        libxslt-dev \
+        net-tools \
+        wget \
+        git \
+        unzip \
+        --allow-unauthenticated \
+    && docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl exif calendar gettext \
+    && pecl install apcu xdebug \
+    && docker-php-ext-enable apcu opcache xdebug \
+    && apt-get purge -y g++ \
+    && apt-get autoremove -y \
+    && rm -r /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
+
+# Set the PATH environment variable
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Copy php.ini
+COPY php.ini /usr/local/etc/php/
+
+# Install Composer
+RUN wget -O /tmp/composer-setup.php https://getcomposer.org/installer \
+    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm /tmp/composer-setup.php
+
+# Change the current working directory
 WORKDIR /var/www/html
-EXPOSE 80
+
+# Change the owner of the container document root
+RUN chown -R www-data:www-data /var/www/html
+
+# Config XDEBUG
+RUN echo "zend_extension=xdebug.so" >> /usr/local/etc/php/php.ini
+ENV XDEBUG_CONFIG="remote_host=host.docker.internal"
+
+# Add custom virtual host configuration
+COPY custom-virtual-host.conf /etc/apache2/sites-available/
+RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
+
+# Enable rewrite mode
+RUN a2enmod rewrite
+
+# Start Apache in foreground
+CMD ["apache2-foreground"]
+
 
