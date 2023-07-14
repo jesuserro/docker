@@ -1,9 +1,6 @@
 # Build image
 FROM php:8.2-apache AS builder
 
-# Install required packages and PHP extensions
-# COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
 # Set the PATH environment variable
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
@@ -29,10 +26,13 @@ RUN { \
 } >> /usr/local/etc/php/php.ini
 
 # Install MySQL extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql session
 
-# Change the current working directory
+# Adjust the working directory
 WORKDIR /var/www/html
+
+# Copy project files
+COPY ./.. /var/www/html
 
 # Change the owner of the container document root
 RUN chown -R www-data:www-data /var/www/html
