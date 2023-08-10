@@ -1,13 +1,13 @@
 version: '3.8'
 services:
-    php80-apache:
-        container_name: php80-apache
+    php7.0.27-apache:
+        container_name: php70-apache
         build:
             context: .
-            dockerfile: Dockerfile.80
+            dockerfile: Dockerfile.70
         volumes:
             - /home/jesus/proyectos/:/var/www/html/
         extra_hosts:
             - host.docker.internal:host-gateway
         ports:
-            - 8080:80
+            - 8070:80

@@ -1,59 +1,30 @@
-# Build image
-FROM php:7.0.27-apache AS builder
+# Use Ubuntu 16.04 (Xenial) as the base image
+FROM ubuntu:16.04
 
-# Install required packages and PHP extensions
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-        libzip-dev \
-        libbz2-dev \
-        libxslt1-dev \
-        net-tools \
-        wget \
-        git \
-        unzip \
-        --allow-unauthenticated \
-    && docker-php-ext-configure gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip bcmath bz2 sockets tokenizer xsl exif calendar gettext \
-    && pecl install apcu-5.1.18 xdebug-2.5.5 \
-    && docker-php-ext-enable apcu opcache xdebug \
-    && apt-get purge -y g++ \
-    && apt-get autoremove -y \
-    && rm -r /var/lib/apt/lists/* \
-    && rm -rf /tmp/*
+# Install required packages
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    libapache2-mod-php7.0 \  
+    php7.0 \
+    php7.0-cli \
+    php7.0-common \
+    php7.0-mysql \
+    php7.0-gd \
+    php7.0-bz2 \
+    php7.0-xsl \
+    php7.0-zip \
+    php7.0-bcmath \
+    php7.0-sockets \
+    php7.0-tokenizer \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the PATH environment variable
-ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# Enable Apache rewrite and php7.0 modules
+RUN a2enmod rewrite && a2enmod php7.0
 
-# Copy php.ini
-COPY php.ini /usr/local/etc/php/
-
-# Install Composer
-RUN wget -O /tmp/composer-setup.php https://getcomposer.org/installer \
-    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && rm /tmp/composer-setup.php
-
-# Change the current working directory
-WORKDIR /var/www/html
-
-# Change the owner of the container document root
-RUN chown -R www-data:www-data /var/www/html
-
-# Config XDEBUG
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so" >> /usr/local/etc/php/php.ini
-ENV XDEBUG_CONFIG remote_host=host.docker.internal
-
-# Add custom virtual host configuration
+# Set up a custom virtual host configuration
 COPY custom-virtual-host.conf /etc/apache2/sites-available/
 RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
 
-# Enable rewrite mode
-RUN a2enmod rewrite
-
 # Start Apache in foreground
-CMD ["apache2-foreground"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
