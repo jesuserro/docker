@@ -32,6 +32,8 @@ RUN { \
     echo 'display_startup_errors = On'; \
     echo 'error_reporting = E_ALL'; \
     echo 'html_errors = On'; \
+    echo 'upload_max_filesize = 200M'; \
+    echo 'post_max_size = 220M'; \
     echo 'zend_extension=/usr/lib/php/20151012/xdebug.so'; \
     echo 'xdebug.mode = debug'; \
     echo 'xdebug.start_with_request = yes'; \
