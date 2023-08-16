@@ -3,6 +3,9 @@ FROM php:7.0-fpm-alpine
 RUN apk update && apk add php7-dev g++ make wget tar \
     && apk add --no-cache libpng-dev libjpeg-turbo-dev freetype-dev icu-dev
 
+# Copy custom php.ini
+COPY php.ini /usr/local/etc/php/conf.d/
+
 # Install necessary PHP extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd mbstring opcache intl json zip bcmath pdo pdo_mysql
