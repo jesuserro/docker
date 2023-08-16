@@ -8,7 +8,7 @@ COPY php.ini /usr/local/etc/php/conf.d/
 
 # Install necessary PHP extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd mbstring opcache intl json zip bcmath pdo pdo_mysql
+RUN docker-php-ext-install gd mbstring opcache intl json zip bcmath pdo pdo_mysql mysqli
 
 # Copy Xdebug source files from your local machine to the container
 COPY xdebug-2.5.5.tgz /tmp/xdebug-2.5.5.tgz
