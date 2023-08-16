@@ -1,9 +1,9 @@
 # My Docker ecosystem
 
-Simple example of using Docker. Creation of 2 Apache containers with PHP 7.0 to PHP 8.2.
+Simple example of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from the official PHP image on Docker Hub: <https://hub.docker.com/_/php>
 
-These Dockerfiles, specially Dockerfile 7.0, install the required packages and PHP extensions, set the PATH environment variable, install Composer, change the current working directory, and set the owner of the container document root. They then install XDEBUG, enable rewrite mode, and set the Apache document root and virtual host parameters using the techniques described earlier. Finally, they starts Apache in foreground mode.
+These Dockerfiles, specially Dockerfile 7.0, install the required packages and PHP extensions, set the PATH environment variable, install Composer, change the current working directory, and set the owner of the container document root. They then install XDEBUG, enable rewrite mode, and set the Apache document root and virtual host parameters using the techniques described earlier. Finally, they starts NGINX/Apache in foreground mode.
 
 ## Instalación
 
@@ -20,12 +20,11 @@ docker compose up
 
 # Para reconstruir imagenes ya creadas
 docker build -t php_apache:7.0 -f Dockerfile.70 .
-docker build -t php_apache:7.4 -f Dockerfile.74 .
 docker build -t php_apache:8.2 -f Dockerfile.82 .
 
 # Para lanzar los contenedores
-docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
 docker run -d -p 8070:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.0
+docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
 
 # Para probarlo en tu navegador
 localhost:8070
@@ -57,11 +56,14 @@ docker container rm -f $(docker container ls -aq)
 
 # Removing all docker images  
 docker rmi $(docker images -q)
+
+# Removing all docker volumes and launching compose.yml in 1 sentence
+docker container rm -f $(docker container ls -aq) && docker rmi $(docker images -q) && clear && docker compose up
 ```
 
 ## VSCODE
 
-### XDEBUG
+### XDebug
 
 In your WSL2 terminal, run this command to get your IP address:
 
@@ -137,6 +139,8 @@ which php
 
 ## Interesting Dockerfiles
 
+- <https://github.com/PauGa9/php-symfony-mysql-nginx-docker>
+- <https://github.com/thecodeholic/php-mvc-framework/blob/master/docker/php.ini>
 - <https://jasonterando.medium.com/debugging-with-visual-studio-code-xdebug-and-docker-on-windows-b63a10b0dec>
 - <https://github.com/thecodeholic/php-mvc-framework>
 - <https://stackoverflow.com/questions/52579102/debug-php-with-vscode-and-docker>
