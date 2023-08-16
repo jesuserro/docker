@@ -1,4 +1,4 @@
-# My Docker ecosystem 
+# My Docker ecosystem
 
 Simple example of using Docker. Creation of 2 Apache containers with PHP 7.0 to PHP 8.2.
 It is made from the official PHP image on Docker Hub: <https://hub.docker.com/_/php>
@@ -25,10 +25,10 @@ docker build -t php_apache:8.2 -f Dockerfile.82 .
 
 # Para lanzar los contenedores
 docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
-docker run -d -p 8074:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.4
+docker run -d -p 8070:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.0
 
 # Para probarlo en tu navegador
-localhost:8074
+localhost:8070
 localhost:8082
 ```
 
@@ -63,6 +63,21 @@ docker rmi $(docker images -q)
 
 ### XDEBUG
 
+In your WSL2 terminal, run this command to get your IP address:
+
+``` shell
+ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+```
+
+So put it at the xdebug.ini file:
+
+``` shell
+xdebug.remote_host = 172.20.28.159
+```
+
+If the IP is correct, you should see the Call Stack requests in the Debug Pane at VSCODE.
+
+``` shell
 In the `launch.json` in your VSCODE project, add this:
 
 ``` shell
@@ -75,14 +90,13 @@ In the `launch.json` in your VSCODE project, add this:
       "request": "launch",
       "port": 9000,
       "pathMappings": {
-          "/var/www/html/YOUR_PROJECT": "${workspaceFolder}"
+        // container path => local path (VSCODE path for projects) ¡IMPORTANT for BREAKPOINTS in your code!
+        "/var/www/html": "/home/jesus/proyectos" 
       },
-      "hostname": "localhost",
-      "log": true,
-      "xdebugSettings": {
-          "max_data": -1
-      }
-    }    
+      "ignore": [
+        "**/vendor/**/*.php"
+      ]
+    }
   ]
 }
 ```
