@@ -23,11 +23,7 @@ RUN cd /tmp && \
     make && \
     cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
 
-# Enable Xdebug
-RUN echo 'zend_extension = /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so' > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo 'xdebug.idekey = VSCODE' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo 'xdebug.remote_enable = 1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo 'xdebug.remote_autostart = 1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo 'xdebug.remote_host = host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+# Copy Xdebug settings to a separate file
+COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 CMD ["php-fpm"]
