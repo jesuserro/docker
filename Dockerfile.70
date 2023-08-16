@@ -1,53 +1,30 @@
-# Use Ubuntu 16.04 (Xenial) as the base image
-FROM ubuntu:16.04
+FROM php:7.0-fpm-alpine
 
-# Install required packages
-RUN apt-get update && apt-get install -y \
-    apache2 \
-    libapache2-mod-php7.0 \
-    php7.0 \
-    php7.0-cli \
-    php7.0-common \
-    php7.0-mysql \
-    php7.0-gd \
-    php7.0-bz2 \
-    php7.0-xsl \
-    php7.0-zip \
-    php7.0-bcmath \
-    php7.0-sockets \
-    php7.0-tokenizer \
-    php7.0-curl \
-    php7.0-dev \  
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk update && apk add php7-dev g++ make wget tar \
+    && apk add --no-cache libpng-dev libjpeg-turbo-dev freetype-dev icu-dev
 
-# Enable Apache rewrite and php7.0 modules
-RUN a2enmod rewrite && a2enmod php7.0
+# Install necessary PHP extensions
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install gd mbstring opcache intl json zip bcmath pdo pdo_mysql
 
-# Install Xdebug using pecl and create its configuration
-RUN pecl install xdebug-2.5.5
+# Copy Xdebug source files from your local machine to the container
+COPY xdebug-2.5.5.tgz /tmp/xdebug-2.5.5.tgz
 
-RUN { \
-    echo 'display_errors = On'; \
-    echo 'display_startup_errors = On'; \
-    echo 'error_reporting = E_ALL'; \
-    echo 'html_errors = On'; \
-    echo 'zend_extension=/usr/lib/php/20151012/xdebug.so'; \
-    echo 'xdebug.remote_enable = 1'; \
-    echo 'xdebug.remote_autostart = 1'; \
-    echo 'xdebug.remote_host = 172.20.28.159'; \
-    echo 'xdebug.remote_port = 9000'; \
-    echo 'xdebug.idekey=VSCODE'; \
-    # echo 'xdebug.remote_log = /var/log/xdebug.log'; \
-    # echo 'xdebug.client_host=host.docker.internal'; \
-    # echo 'xdebug.client_port=9000'; \
-    # echo 'xdebug.mode = debug'; \
-    # echo 'xdebug.discover_client_host=1'; \
-} >> /etc/php/7.0/apache2/php.ini
+# Extract Xdebug source files and build
+RUN cd /tmp && \
+    tar -xf xdebug-2.5.5.tgz && \
+    rm xdebug-2.5.5.tgz && \
+    cd xdebug-2.5.5 && \
+    phpize && \
+    ./configure && \
+    make && \
+    cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
 
-# Set up a custom virtual host configuration
-COPY custom-virtual-host.conf /etc/apache2/sites-available/
-RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
+# Enable Xdebug
+RUN echo 'zend_extension = /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so' > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo 'xdebug.idekey = VSCODE' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo 'xdebug.remote_enable = 1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo 'xdebug.remote_autostart = 1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo 'xdebug.remote_host = host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-# Start Apache in foreground
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["php-fpm"]
