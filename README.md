@@ -3,41 +3,42 @@
 Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
 
-- Alpine Linux image: <https://hub.docker.com/_/alpine>
-- The official PHP image on Docker Hub: <https://hub.docker.com/_/php>
+- Alpine Linux image: <https://hub.docker.com/_/alpine> (<Dockerfile.70>)
+- The official PHP image on Docker Hub: <https://hub.docker.com/_/php> (<Dockerfile.82>)
 
 These Dockerfiles are based on the official images, but they have been modified to install XDebug and other extensions.
 
-## Instalación
+## Installation
 
 ``` shell
 mkdir ~/proyectos && cd ~/proyectos
 git clone https://github.com/jesuserro/docker.git
 ```
 
-## Levantando containers simples
+## Usage
 
 ``` shell
 cd ~/proyectos/docker
 
-# Levantar container con yaml
+# Run/Launch a set of related containers
 docker compose up
 
-# Para reconstruir imagenes ya creadas
-docker build -t php_apache:7.0 -f Dockerfile.70 .
-docker build -t php_apache:8.2 -f Dockerfile.82 .
+# Create a Docker image from a Dockerfile
+docker build -t my-php-image70 -f Dockerfile.70 .
+docker build -t my-php-image82 -f Dockerfile.82 .
 
-# Para lanzar los contenedores
-docker run -d -p 8070:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.0
-docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
+# Run container based on an image
+docker run -d -p 8070:80 --name my-php-container70 my-php-image70 -v /home/jesus/proyectos:/var/www/html
+docker run -d -p 8082:80 --name my-php-container82 my-php-image82 -v /home/jesus/proyectos:/var/www/html
 
 # In your browser
 http://localhost:8070
 http://localhost:8082
 http://localhost:8070/ofertas/public/admin/index.php
+http://localhost:8082/nges/public/
 ```
 
-## Otros comandos
+## Other commands
 
 ``` shell
 # Abriendo terminal del contenedor
