@@ -11,7 +11,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN docker-php-ext-install gd mbstring opcache intl json zip bcmath pdo pdo_mysql mysqli
 
 # Copy Xdebug source files from your local machine to the container
-COPY ./bin/xdebug-2.5.5.tgz /tmp/xdebug-2.5.5.tgz
+COPY ./var/bin/php/xdebug-2.5.5.tgz /tmp/xdebug-2.5.5.tgz
 
 # Extract Xdebug source files and build
 RUN cd /tmp && \
