@@ -15,6 +15,18 @@ mkdir ~/proyectos && cd ~/proyectos
 git clone https://github.com/jesuserro/docker.git
 ```
 
+## File Structure
+
+``` shell
+📦home
+ ┣ 📂jesus
+ ┃ ┗ 📂proyectos
+ ┃ ┃ ┗ 📂docker
+ ┃ ┃ ┗ 📂project-1
+ ┃ ┃ ┗ 📂ofertas
+ ┃ ┃ ┗ 📂nges
+```
+
 ## Usage
 
 ### Run containers
