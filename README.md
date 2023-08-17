@@ -15,7 +15,7 @@ mkdir ~/proyectos && cd ~/proyectos
 git clone https://github.com/jesuserro/docker.git
 ```
 
-## File Structure
+## Local File Structure
 
 ``` shell
 📦home
