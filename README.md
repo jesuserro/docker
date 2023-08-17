@@ -3,8 +3,8 @@
 Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
 
-- Alpine Linux image: <https://hub.docker.com/_/alpine> (<Dockerfile.70>)
-- The official PHP image on Docker Hub: <https://hub.docker.com/_/php> (<Dockerfile.82>)
+- Alpine Linux image: <https://hub.docker.com/_/alpine> ([Dockerfile.70](https://github.com/jesuserro/docker/blob/main/Dockerfile.70))
+- The official PHP image on Docker Hub: <https://hub.docker.com/_/php> ([Dockerfile.82](https://github.com/jesuserro/docker/blob/main/Dockerfile.82))
 
 These Dockerfiles are based on the official images, but they have been modified to install XDebug and other extensions.
 
