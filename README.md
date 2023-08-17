@@ -20,10 +20,10 @@ git clone https://github.com/jesuserro/docker.git
 ``` shell
 cd ~/proyectos/docker
 
-# Run/Launch a set of related containers defined in docker-compose.yml 
+# Run/Launch a set of related containers defined in "docker-compose.yml" 
 docker compose up
 
-# Create new image called "my-php-image70" from existing Dockerfile.70
+# Create new image called "my-php-image70" from existing "Dockerfile.70"
 docker build -t my-php-image70 -f Dockerfile.70 .
 docker build -t my-php-image82 -f Dockerfile.82 .
 
@@ -41,14 +41,14 @@ http://localhost:8082/nges/public/
 ## Other commands
 
 ``` shell
-# Abriendo terminal del contenedor
-docker exec -it php82-apache /bin/bash
+# Start terminal session inside the "my-php-container70" container
+docker exec -it my-php-container70 /bin/bash
 
-# Mostrando logs del contenedor
-docker logs php82-apache
+# Show container logs
+docker logs my-php-container70
 
-# Parando contenedores
-docker stop php82-apache
+# Stopping a container
+docker stop my-php-container70
 
 # Removing all docker containers  
 docker container rm -f $(docker container ls -aq)
