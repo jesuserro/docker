@@ -14,7 +14,7 @@ services:
         ports:
             - "8070:80"
         volumes:
-            - ./nginx/conf.d/:/etc/nginx/conf.d/
+            - ./conf/nginx/conf.d/:/etc/nginx/conf.d/
             - /home/jesus/proyectos/:/var/www/html/
         depends_on:
             - php-fpm
