@@ -1,14 +1,14 @@
 version: '3.8'
 services:
     nges74:
-        container_name: php74-apache
+        container_name: php70-apache
         build:
             context: .
-            dockerfile: Dockerfile.74
+            dockerfile: Dockerfile.70
         volumes:
             - /home/jesus/proyectos/:/var/www/html/
         ports:
-            - 8074:80
+            - 8070:80
     nges82:
         container_name: php82-apache
         build:
