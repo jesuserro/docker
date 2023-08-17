@@ -22,12 +22,19 @@ git clone https://github.com/jesuserro/docker.git
 ``` shell
 cd ~/proyectos/docker
 
-# Run/Launch containers at "docker-compose.yml" 
+# Run/Launch container for php 7.0
 docker compose up
 
-# Run/Launch all containers at "docker-compose.yml" and "docker-compose.dev.yml"
+# Run/Launch all containers for php 7.0 and php 8.2
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
+
+### In your browser
+
+<http://localhost:8070>
+<http://localhost:8082>
+<http://localhost:8070/ofertas/public/admin/index.php>
+<http://localhost:8082/nges/public/>
 
 ### Regenerating containers
 
@@ -39,12 +46,6 @@ docker build -t my-php-image82 -f Dockerfile.82 .
 # Run new container instance called "my-php-container70" based on existing image "my-php-image70"
 docker run -d -p 8070:80 --name my-php-container70 my-php-image70 -v /home/jesus/proyectos:/var/www/html
 docker run -d -p 8082:80 --name my-php-container82 my-php-image82 -v /home/jesus/proyectos:/var/www/html
-
-# In your browser
-http://localhost:8070
-http://localhost:8082
-http://localhost:8070/ofertas/public/admin/index.php
-http://localhost:8082/nges/public/
 ```
 
 ### Other commands
