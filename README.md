@@ -1,9 +1,12 @@
 # My Docker ecosystem
 
-Simple example of using Docker. Creation of containers with PHP 7/8 and XDebug.
-It is made from the official PHP image on Docker Hub: <https://hub.docker.com/_/php>
+Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
+It is made from:
 
-These Dockerfiles, specially Dockerfile 7.0, install the required packages and PHP extensions, set the PATH environment variable, install Composer, change the current working directory, and set the owner of the container document root. They then install XDEBUG, enable rewrite mode, and set the Apache document root and virtual host parameters using the techniques described earlier. Finally, they starts NGINX/Apache in foreground mode.
+- Alpine Linux image: <https://hub.docker.com/_/alpine>
+- The official PHP image on Docker Hub: <https://hub.docker.com/_/php>
+
+These Dockerfiles are based on the official images, but they have been modified to install XDebug and other extensions.
 
 ## Instalación
 
@@ -34,17 +37,9 @@ http://localhost:8082
 http://localhost:8070/ofertas/public/admin/index.php
 ```
 
-## Levantando containers con Docker Compose
+## Otros comandos
 
 ``` shell
-cd /home/jesus/proyectos/docker
-
-# Levantando contenedores definidos en docker-compose.yml
-docker compose up
-
-# En tu navegador
-localhost:8082
-
 # Abriendo terminal del contenedor
 docker exec -it php82-apache /bin/bash
 
@@ -60,8 +55,8 @@ docker container rm -f $(docker container ls -aq)
 # Removing all docker images  
 docker rmi $(docker images -q)
 
-# Removing all docker volumes and launching compose.yml in 1 sentence
-docker container rm -f $(docker container ls -aq) && docker rmi $(docker images -q) && clear && docker compose up
+# Removing all in 1 sentence
+docker container rm -f $(docker container ls -aq) && docker rmi $(docker images -q)
 ```
 
 ## VSCODE
@@ -74,7 +69,7 @@ In your WSL2 terminal, run this command to get your IP address:
 ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
 ```
 
-So put it at the xdebug.ini file:
+So put it at the `xdebug.ini` file:
 
 ``` shell
 xdebug.remote_host = 172.20.28.159
