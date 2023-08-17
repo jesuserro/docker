@@ -17,12 +17,21 @@ git clone https://github.com/jesuserro/docker.git
 
 ## Usage
 
+### Run containers
+
 ``` shell
 cd ~/proyectos/docker
 
-# Run/Launch existing containers defined at "docker-compose.yml" 
+# Run/Launch containers at "docker-compose.yml" 
 docker compose up
 
+# Run/Launch all containers at "docker-compose.yml" and "docker-compose.dev.yml"
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+
+### Regenerating containers
+
+``` shell
 # Create new image called "my-php-image70" from existing "Dockerfile.70"
 docker build -t my-php-image70 -f Dockerfile.70 .
 docker build -t my-php-image82 -f Dockerfile.82 .
@@ -38,7 +47,7 @@ http://localhost:8070/ofertas/public/admin/index.php
 http://localhost:8082/nges/public/
 ```
 
-## Other commands
+### Other commands
 
 ``` shell
 # Start terminal session inside the "my-php-container70" container

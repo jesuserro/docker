@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-    php-fpm:
+    php70-fpm:
         build:
             context: .
             dockerfile: Dockerfile.70
@@ -17,7 +17,7 @@ services:
             - ./conf/nginx/conf.d/:/etc/nginx/conf.d/
             - /home/jesus/proyectos/:/var/www/html/
         depends_on:
-            - php-fpm
+            - php70-fpm
         networks:
             - mynetwork
 networks:
