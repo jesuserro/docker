@@ -1,4 +1,4 @@
-# My Docker ecosystem
+# My Docker garden
 
 Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
@@ -20,7 +20,7 @@ git clone https://github.com/jesuserro/docker.git
 ``` shell
 cd ~/proyectos/docker
 
-# Run/Launch a set of related containers defined in "docker-compose.yml" 
+# Run/Launch existing containers defined at "docker-compose.yml" 
 docker compose up
 
 # Create new image called "my-php-image70" from existing "Dockerfile.70"
