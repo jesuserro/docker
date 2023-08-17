@@ -38,7 +38,7 @@ COPY ./.. /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Add custom virtual host configuration
-COPY custom-virtual-host.conf /etc/apache2/sites-available/
+COPY ./apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-available/
 RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
 
 # Enable rewrite mode
