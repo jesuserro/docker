@@ -15,6 +15,8 @@ git clone https://github.com/jesuserro/docker.git
 ## Levantando containers simples
 
 ``` shell
+cd ~/proyectos/docker
+
 # Levantar container con yaml
 docker compose up
 
@@ -26,9 +28,10 @@ docker build -t php_apache:8.2 -f Dockerfile.82 .
 docker run -d -p 8070:80 -v /home/jesus/proyectos:/var/www/html --name php74 php_apache:7.0
 docker run -d -p 8082:80 -v /home/jesus/proyectos:/var/www/html --name php82 php_apache:8.2
 
-# Para probarlo en tu navegador
-localhost:8070
-localhost:8082
+# In your browser
+http://localhost:8070
+http://localhost:8082
+http://localhost:8070/ofertas/public/admin/index.php
 ```
 
 ## Levantando containers con Docker Compose
@@ -88,9 +91,10 @@ Now, in the `launch.json` in your VSCODE project, add this:
       "name": "Docker Xdebug",
       "type": "php",
       "request": "launch",
+      # Put here the remote port you defined at "xdebug.remote_port" in your xdebug.ini file:
       "port": 9000,
       "pathMappings": {
-        // container path:local path (VSCODE path for projects) ---> ¡IMPORTANT for BREAKPOINTS in your code!
+        # Put here "container path:local path" ---> ¡IMPORTANT for BREAKPOINTS in your code!
         "/var/www/html": "/home/jesus/proyectos" 
       },
       "ignore": [
