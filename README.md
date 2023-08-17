@@ -1,4 +1,4 @@
-# My Docker garden
+# My Docker Garden
 
 Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
