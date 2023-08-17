@@ -4,7 +4,7 @@ Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
 
 - Alpine Linux image: <https://hub.docker.com/_/alpine> ([Dockerfile.70](https://github.com/jesuserro/docker/blob/main/Dockerfile.70))
-- The official PHP image on Docker Hub: <https://hub.docker.com/_/php> ([Dockerfile.82](https://github.com/jesuserro/docker/blob/main/Dockerfile.82))
+- Official PHP image: <https://hub.docker.com/_/php> ([Dockerfile.82](https://github.com/jesuserro/docker/blob/main/Dockerfile.82))
 
 These Dockerfiles are based on the official images, but they have been modified to install XDebug and other extensions.
 
@@ -20,14 +20,14 @@ git clone https://github.com/jesuserro/docker.git
 ``` shell
 cd ~/proyectos/docker
 
-# Run/Launch a set of related containers
+# Run/Launch a set of related containers defined in docker-compose.yml 
 docker compose up
 
-# Create a Docker image from a Dockerfile
+# Create new image called "my-php-image70" from existing Dockerfile.70
 docker build -t my-php-image70 -f Dockerfile.70 .
 docker build -t my-php-image82 -f Dockerfile.82 .
 
-# Run container based on an image
+# Run new container instance called "my-php-container70" based on existing image "my-php-image70"
 docker run -d -p 8070:80 --name my-php-container70 my-php-image70 -v /home/jesus/proyectos:/var/www/html
 docker run -d -p 8082:80 --name my-php-container82 my-php-image82 -v /home/jesus/proyectos:/var/www/html
 
