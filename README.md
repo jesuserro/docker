@@ -94,7 +94,7 @@ Now, in the `launch.json` in your VSCODE project, add this:
       # Put here the remote port you defined at "xdebug.remote_port" in your xdebug.ini file:
       "port": 9000,
       "pathMappings": {
-        # Put here "container path:local path" ---> ¡IMPORTANT for BREAKPOINTS in your code!
+        # Put here "container_path:local_path" ---> ¡IMPORTANT for BREAKPOINTS in your local code to work!
         "/var/www/html": "/home/jesus/proyectos" 
       },
       "ignore": [
@@ -137,7 +137,6 @@ Docker containers are useful for testing your code in different PHP versions. Th
 [![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
 
 - [Migración de Zend Framework 1 a PHP 8.1](https://github.com/Shardj/zf1-future)
-
 - [Terraform](https://registry.terraform.io/) a cloud management service for AWS, Google Cloud, Azure, and so on.
 
 ## Interesting Dockerfiles
