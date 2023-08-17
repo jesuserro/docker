@@ -32,8 +32,11 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ### In your browser
 
 <http://localhost:8070>
+
 <http://localhost:8082>
+
 <http://localhost:8070/ofertas/public/admin/index.php>
+
 <http://localhost:8082/nges/public/>
 
 ### Regenerating containers
