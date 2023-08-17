@@ -78,9 +78,7 @@ xdebug.remote_host = 172.20.28.159
 ```
 
 If the IP is correct, you should see the Call Stack requests in the Debug Pane at VSCODE.
-
-``` shell
-In the `launch.json` in your VSCODE project, add this:
+Now, in the `launch.json` in your VSCODE project, add this:
 
 ``` shell
 {
@@ -92,7 +90,7 @@ In the `launch.json` in your VSCODE project, add this:
       "request": "launch",
       "port": 9000,
       "pathMappings": {
-        // container path => local path (VSCODE path for projects) ¡IMPORTANT for BREAKPOINTS in your code!
+        // container path:local path (VSCODE path for projects) ---> ¡IMPORTANT for BREAKPOINTS in your code!
         "/var/www/html": "/home/jesus/proyectos" 
       },
       "ignore": [
@@ -131,6 +129,7 @@ which php
 
 ### De PHP 5.3 a PHP 8.2
 
+Docker containers are useful for testing your code in different PHP versions. This video shows how to use Docker to test your code in PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, and 8.1.
 [![De PHP 5.3 a PHP 8.2](https://img.youtube.com/vi/BHAYO6esXlw/0.jpg)](https://www.youtube.com/watch?v=BHAYO6esXlw)
 
 - [Migración de Zend Framework 1 a PHP 8.1](https://github.com/Shardj/zf1-future)
