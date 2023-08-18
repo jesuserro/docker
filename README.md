@@ -82,9 +82,7 @@ docker rmi $(docker images -q)
 docker container rm -f $(docker container ls -aq) && docker rmi $(docker images -q)
 ```
 
-## VSCODE
-
-### XDebug 2.5.5
+## XDEBUG
 
 In your WSL2 terminal, run this command to get your IP address:
 
@@ -92,11 +90,35 @@ In your WSL2 terminal, run this command to get your IP address:
 ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
 ```
 
+### XDebug 2.5.5
+
 So put it at the `xdebug.ini` file:
 
 ``` shell
 xdebug.remote_host = 172.20.28.159
 ```
+
+### XDebug 3
+
+So put it at the `xdebug.ini` file:
+
+``` shell
+xdebug.remote_host=host.docker.internal
+```
+
+and in the `docker-compose.dev.yml` file:
+
+``` shell
+  extra_hosts:
+    - host.docker.internal:172.20.28.159
+  environment:
+    XDEBUG_MODE: develop,debug
+    XDEBUG_CONFIG:
+      client_host=host.docker.internal
+      start_with_request=yes
+```
+
+## VSCODE
 
 If the IP is correct, you should see the Call Stack requests in the Debug Pane at VSCODE.
 Now, in the `launch.json` in your VSCODE project, add this:
@@ -110,7 +132,7 @@ Now, in the `launch.json` in your VSCODE project, add this:
       "type": "php",
       "request": "launch",
       # Put here the remote port you defined at "xdebug.remote_port" in your xdebug.ini file:
-      "port": 9000,
+      "port": 9000, # 9000 for PHP 7.0 (XDebug 2.5.5) and 9003 for PHP 8.2 (XDebug 3)
       "pathMappings": {
         # Put here "container_path:local_path" ---> ¡IMPORTANT for BREAKPOINTS in your local code to work!
         "/var/www/html": "/home/jesus/proyectos" 
