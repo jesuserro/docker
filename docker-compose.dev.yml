@@ -10,7 +10,7 @@ services:
     ports:
       - 8082:80
     extra_hosts:
-      - host.docker.internal:host-gateway 
+      - host.docker.internal:172.20.28.159
     environment:
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG:

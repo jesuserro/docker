@@ -11,19 +11,8 @@ COPY ./conf/php/conf.d/php.ini /usr/local/etc/php/
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
-# Enable display of PHP errors in the browser
-RUN { \
-    echo 'display_errors = On'; \
-    echo 'display_startup_errors = On'; \
-    echo 'error_reporting = E_ALL'; \
-    echo 'html_errors = On'; \
-    echo 'xdebug.mode = debug'; \
-    echo 'xdebug.start_with_request = yes'; \
-    echo 'xdebug.client_host = host.docker.internal'; \
-    echo 'xdebug.idekey = VSCODE'; \
-    echo 'xdebug.discover_client_host = 1'; \
-    echo 'xdebug.client_port = 9000'; \
-} >> /usr/local/etc/php/php.ini
+# Copy Xdebug configuration
+COPY ./conf/php/conf.d/xdebug-322.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install MySQL extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql session
