@@ -1,5 +1,5 @@
 # Build image
-FROM php:8.2-apache AS builder
+FROM php:8.1-apache AS builder
 
 # Set the PATH environment variable
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -17,6 +17,19 @@ COPY ./conf/php/conf.d/xdebug-322.ini /usr/local/etc/php/conf.d/xdebug.ini
 # Install MySQL extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql session
 
+# Install GD extension with support for multiple image formats
+RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libgif-dev
+
+RUN docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg
+
+RUN docker-php-ext-install -j$(nproc) gd
+
 # Adjust the working directory
 WORKDIR /var/www/html
 
@@ -33,5 +46,5 @@ RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sit
 # Enable rewrite mode
 RUN a2enmod rewrite
 
-# Start Apache in foreground
+# Start Apache in the foreground
 CMD ["apache2-foreground"]

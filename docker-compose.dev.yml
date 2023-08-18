@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  php82-apache:
+  php81-apache:
     build:
       context: .
-      dockerfile: Dockerfile.82
+      dockerfile: Dockerfile.81
     volumes:
       - /home/jesus/proyectos/:/var/www/html/
     ports:
-      - 8082:80
+      - 8081:80
     extra_hosts:
       - host.docker.internal:172.20.28.159
     environment:
