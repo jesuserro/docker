@@ -84,7 +84,7 @@ docker container rm -f $(docker container ls -aq) && docker rmi $(docker images 
 
 ## VSCODE
 
-### XDebug
+### XDebug 2.5.5
 
 In your WSL2 terminal, run this command to get your IP address:
 
