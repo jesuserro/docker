@@ -88,6 +88,7 @@ In your WSL2 terminal, run this command to get your IP address:
 
 ``` shell
 ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+  # Returning: 172.20.28.159
 ```
 
 ### XDebug 2.5.5
