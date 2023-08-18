@@ -91,7 +91,7 @@ ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
   # Returning: 172.20.28.159
 ```
 
-### XDebug 2.5.5
+### XDebug 2.5.5/PHP 7.0
 
 So put it at the `xdebug.ini` file:
 
@@ -99,7 +99,7 @@ So put it at the `xdebug.ini` file:
 xdebug.remote_host = 172.20.28.159
 ```
 
-### XDebug 3
+### XDebug 3/PHP 8+
 
 So put it at the `xdebug.ini` file:
 
