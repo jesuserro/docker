@@ -4,7 +4,7 @@ Simple examples of using Docker. Creation of containers with PHP 7/8 and XDebug.
 It is made from:
 
 - Alpine Linux image: <https://hub.docker.com/_/alpine> ([Dockerfile.70](https://github.com/jesuserro/docker/blob/main/Dockerfile.70))
-- Official PHP image: <https://hub.docker.com/_/php> ([Dockerfile.82](https://github.com/jesuserro/docker/blob/main/Dockerfile.82))
+- Official PHP image: <https://hub.docker.com/_/php> ([Dockerfile.81](https://github.com/jesuserro/docker/blob/main/Dockerfile.81))
 
 These Dockerfiles are based on the official images, but they have been modified to install XDebug and other extensions.
 
@@ -37,27 +37,27 @@ cd ~/proyectos/docker
 # Run/Launch container for php 7.0
 docker compose up
 
-# Run/Launch all containers for php 7.0 and php 8.2
+# Run/Launch all containers for php 7.0 and php 8
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 ### In your browser
 
 - <http://localhost:8070>
-- <http://localhost:8082>
+- <http://localhost:8081>
 - <http://localhost:8070/ofertas/public/admin/index.php>
-- <http://localhost:8082/nges/public/>
+- <http://localhost:8081/nges/public/>
 
 ### Regenerating containers
 
 ``` shell
 # Create new image called "my-php-image70" from existing "Dockerfile.70"
 docker build -t my-php-image70 -f Dockerfile.70 .
-docker build -t my-php-image82 -f Dockerfile.82 .
+docker build -t my-php-image81 -f Dockerfile.81 .
 
 # Run new container instance called "my-php-container70" based on existing image "my-php-image70"
 docker run -d -p 8070:80 --name my-php-container70 my-php-image70 -v /home/jesus/proyectos:/var/www/html
-docker run -d -p 8082:80 --name my-php-container82 my-php-image82 -v /home/jesus/proyectos:/var/www/html
+docker run -d -p 8081:80 --name my-php-container81 my-php-image81 -v /home/jesus/proyectos:/var/www/html
 ```
 
 ### Other commands
@@ -133,7 +133,7 @@ Now, in the `launch.json` in your VSCODE project, add this:
       "type": "php",
       "request": "launch",
       # Put here the remote port you defined at "xdebug.remote_port" in your xdebug.ini file:
-      "port": 9000, # 9000 for PHP 7.0 (XDebug 2.5.5) and 9003 for PHP 8.2 (XDebug 3)
+      "port": 9000, # 9000 for PHP 7.0 (XDebug 2.5.5) and 9003 for PHP 8 (XDebug 3)
       "pathMappings": {
         # Put here "container_path:local_path" ---> ¡IMPORTANT for BREAKPOINTS in your local code to work!
         "/var/www/html": "/home/jesus/proyectos" 
