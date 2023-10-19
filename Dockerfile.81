@@ -30,6 +30,9 @@ RUN docker-php-ext-configure gd \
 
 RUN docker-php-ext-install -j$(nproc) gd
 
+# Install zip and unzip
+RUN apt-get update && apt-get install -y zip unzip
+
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
