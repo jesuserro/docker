@@ -36,6 +36,9 @@ RUN apt-get update && apt-get install -y zip unzip libzip-dev
 # Install zip extension with libzip
 RUN docker-php-ext-install zip
 
+# Install Git
+RUN apt-get update && apt-get install -y git
+
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
