@@ -83,6 +83,9 @@ docker container rm -f $(docker container ls -aq) && docker rmi $(docker images 
 
 # Full remove
 docker system prune -a
+
+# Borrado total de la caché
+docker builder prune -a
 ```
 
 ## XDEBUG
