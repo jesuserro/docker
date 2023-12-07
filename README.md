@@ -80,6 +80,9 @@ docker rmi $(docker images -q)
 
 # Removing all in 1 sentence
 docker container rm -f $(docker container ls -aq) && docker rmi $(docker images -q)
+
+# Full remove
+docker system prune -a
 ```
 
 ## XDEBUG
