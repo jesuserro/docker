@@ -133,6 +133,12 @@ Now, in the `launch.json` in your VSCODE project, add this:
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Listen for Xdebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003
+    },
+    {
       "name": "Docker Xdebug",
       "type": "php",
       "request": "launch",
