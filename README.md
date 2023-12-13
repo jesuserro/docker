@@ -107,7 +107,7 @@ xdebug.remote_host = 172.20.28.159
 
 ### XDebug 3/PHP 8+
 
-So put it at the `xdebug.ini` file:
+No need IP definition, so put it at the `xdebug.ini` file:
 
 ``` shell
 xdebug.remote_host=host.docker.internal
@@ -116,8 +116,6 @@ xdebug.remote_host=host.docker.internal
 and in the `docker-compose.dev.yml` file:
 
 ``` shell
-  extra_hosts:
-    - host.docker.internal:172.20.28.159
   environment:
     XDEBUG_MODE: develop,debug
     XDEBUG_CONFIG:
