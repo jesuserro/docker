@@ -12,7 +12,7 @@ RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 # Copy Xdebug configuration
-COPY ./conf/php/conf.d/xdebug-322.ini /usr/local/etc/php/conf.d/xdebug.ini
+# COPY ./conf/php/conf.d/xdebug-322.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install Xdebug 2: forma automática de enlazar el .so
 # RUN pecl install xdebug \
@@ -63,7 +63,7 @@ COPY ./conf/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-
 RUN ln -s /etc/apache2/sites-available/custom-virtual-host.conf /etc/apache2/sites-enabled/
 
 # Enable rewrite mode
-RUN a2enmod rewrite
+# RUN a2enmod rewrite
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+# CMD ["apache2-foreground"]

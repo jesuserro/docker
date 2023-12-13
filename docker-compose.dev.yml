@@ -7,10 +7,9 @@ services:
       dockerfile: Dockerfile.81
     volumes:
       - /home/jesus/proyectos/:/var/www/html/
+      - ./conf/php/conf.d/xdebug-322.ini:/usr/local/etc/php/conf.d/xdebug.ini
     ports:
       - 8081:80
-    extra_hosts:
-      - host.docker.internal:172.20.28.159
     environment:
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG:
