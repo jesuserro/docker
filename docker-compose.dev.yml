@@ -1,5 +1,6 @@
 services:
   php81-apache:
+    container_name: mi-contenedor-php81
     build:
       context: .
       dockerfile: Dockerfile.81
