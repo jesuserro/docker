@@ -36,6 +36,7 @@ cd ~/proyectos/docker
 
 # Run/Launch container for php 7.0
 docker compose up
+docker-compose docker-compose.dev.yml up
 
 # Run/Launch all containers for php 7.0 and php 8
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
