@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.81
     volumes:
       - /home/jesus/proyectos/:/var/www/html/
-      - ./conf/php/conf.d/xdebug-322.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./conf/php/conf.d/xdebug-322.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     ports:
       - 8081:80  # Si se definen aquí, aparecen en VSCODE como: "Statically forwarded"
       - 9003:9003 # Si se definen aquí, aparecen en VSCODE como: "Statically forwarded"
