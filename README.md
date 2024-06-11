@@ -114,7 +114,7 @@ No need IP definition, so put it at the `xdebug.ini` file:
 xdebug.remote_host=host.docker.internal
 ```
 
-and in the `docker-compose.dev.yml` file:
+and in the `docker-compose.dev.yml` file, beware of these environment configurations:
 
 ``` shell
   environment:
@@ -123,6 +123,8 @@ and in the `docker-compose.dev.yml` file:
       client_host=host.docker.internal
       start_with_request=yes
 ```
+
+It might be breaking the breakpoint debug.
 
 ## VSCODE
 
