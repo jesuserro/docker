@@ -1,8 +1,9 @@
 <?php 
 
-$a = 1;
+date_default_timezone_set('Europe/Madrid');
+$dateNow = date('Y-m-d H:i:s');
 
-echo "Var a = $a";
+echo "dateNow: $dateNow\n";
 
 phpinfo();
 
