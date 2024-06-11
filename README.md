@@ -150,6 +150,12 @@ Now, in the `launch.json` in your VSCODE project, add this:
 }
 ```
 
+At Debug Console we'll see:
+
+``` shell
+Listening on { address: '::', family: 'IPv6', port: 9003 }
+```
+
 ### Php Executable
 
 ``` shell
