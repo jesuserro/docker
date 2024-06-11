@@ -5,7 +5,7 @@ $dateNow = date('Y-m-d H:i:s');
 
 echo "dateNow: $dateNow\n";
 
-phpinfo();
+// phpinfo();
 
-// xdebug_info();
+xdebug_info();
     

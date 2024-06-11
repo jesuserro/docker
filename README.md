@@ -131,29 +131,22 @@ Now, in the `launch.json` in your VSCODE project, add this:
 
 ``` shell
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Listen for Xdebug",
-      "type": "php",
-      "request": "launch",
-      "port": 9003
-    },
-    {
-      "name": "Docker Xdebug",
-      "type": "php",
-      "request": "launch",
-      # Put here the remote port you defined at "xdebug.remote_port" in your xdebug.ini file:
-      "port": 9000, # 9000 for PHP 7.0 (XDebug 2.5.5) and 9003 for PHP 8 (XDebug 3)
-      "pathMappings": {
-        # Put here "container_path:local_path" ---> ¡IMPORTANT for BREAKPOINTS in your local code to work!
-        "/var/www/html": "/home/jesus/proyectos" 
-      },
-      "ignore": [
-        "**/vendor/**/*.php"
-      ]
-    }
-  ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for XDebug on Docker",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/var/www/html/docker/": "${workspaceFolder}/"
+            },
+            "log": true,
+            "ignore": [
+                "**/vendor/**/*.php"
+            ]
+        }
+    ]
 }
 ```
 
